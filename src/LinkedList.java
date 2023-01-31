@@ -59,9 +59,9 @@ public class LinkedList {
             if (i < size - 1) {
                 System.out.print(" -> ");
             }
-
             currentNode = currentNode.getNext();
         }
+        System.out.println("\n");
     }
 
 
