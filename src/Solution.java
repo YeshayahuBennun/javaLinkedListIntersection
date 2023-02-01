@@ -1,20 +1,45 @@
 public class Solution {
     public static void main(String[] args) {
-        ListNode nodeC = new ListNode(8);
-        nodeC.next = new ListNode(4);
-        nodeC.next.next = new ListNode(5);
-
-        ListNode nodeA = new ListNode(4);
-        nodeA.next = new ListNode(1);
-
-        ListNode nodeB = new ListNode(5);
-        nodeB.next = new ListNode(6);
-        nodeB.next.next = new ListNode(1);
-        nodeB.next.next.next = nodeC;
+        int[] arrayA = {1};
+        int[] arrayB = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50};
+        int[] arrayC = {51};
 
 
-        nodeA.next.next = nodeC;
-        System.out.println(getIntersectionNode(nodeA, nodeB).val);
+        ListNode nodeA = createListNode(arrayA);
+        ListNode nodeB = createListNode(arrayB);
+        ListNode nodeC = createListNode(arrayB);
+
+        traversal(nodeA);
+        ListNode headA = mergeTwoLinkedLists(nodeB, nodeC);
+
+        traversal(headA);
+
+    }
+
+    private static ListNode mergeTwoLinkedLists(ListNode nodeA, ListNode nodeC) {
+        ListNode newNode = null;
+        while (nodeA != null) {
+            newNode = nodeA;
+            nodeA = nodeA.next;
+            newNode = newNode.next;
+        }
+        return null;
+
+    }
+
+    private static ListNode createListNode(int[] array) {
+        ListNode newNode = null;
+        ListNode currentNode = null;
+        for (int a : array) {
+            if (newNode == null) {
+                newNode = new ListNode(a);
+                currentNode = newNode;
+            } else {
+                currentNode.next = new ListNode(a);
+                currentNode = currentNode.next;
+            }
+        }
+        return newNode;
     }
 
     public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
@@ -32,6 +57,11 @@ public class Solution {
             }
         }
 
+        if (shorterSize == 1 && longestSize == 2) {
+            if (shorter.hashCode() == longest.next.hashCode()) {
+                return shorter;
+            }
+        }
 
         if (longestSize == shorterSize) {
             for (int i = 0; i < longestSize - 1; i++) {
@@ -115,5 +145,6 @@ public class Solution {
             }
             node = node.next;
         }
+        System.out.println('\n');
     }
 }
